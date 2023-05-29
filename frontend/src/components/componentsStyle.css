@@ -1,0 +1,27 @@
+.navBarMain{
+    font-style: italic;
+    height: 60px;
+    background-color:rgb(194, 234, 234);
+    display: flex;
+    justify-content: space-between;
+}
+.logBox{
+    padding: 10px;
+    font-size:x-large;
+}
+.MenuBar{
+    display: flex;
+    margin-right: 10%; 
+}
+.menuItems{
+    padding: 20px;
+}
+
+.menuItems:hover{
+    background-color: white;
+    cursor: pointer;
+}
+.Link{
+    text-decoration: none;
+    color: black;
+}
