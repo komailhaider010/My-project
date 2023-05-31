@@ -20,8 +20,10 @@ router.get('/comments', async (req, res) => {
 
 router.post('/addcomment', async (req, res) => {
   try {
-    const [name, topicName, comment] = req.body;
-    await Comment.create({name, topicName, comment})
+    const {name, topicName, comment}= req.body;
+    // const topicName = req.body;
+    // const comment = req.body;
+    await Comment.create({name, topicName, comment});
     res.status(201).json({ msg: "User Created" });
   } catch (error) {
     console.log(error);
