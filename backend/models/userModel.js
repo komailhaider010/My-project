@@ -1,18 +1,22 @@
 const mongoose = require('mongoose');
 
-const commentSchema = new mongoose.Schema({
-    name: {
+const userSchema = new mongoose.Schema({
+    username: {
         type: String,
         required: true
     },
-    topicName: {
-        type: String
+    email: {
+        type: String,
+        required: true,
+        unique: true
     },
-    comment: {
+    password: {
         type: String    
-    }  
+    },
+    cPassword: {
+        type: String    
+    }
 });
 
-const Comment = new mongoose.model("comment", commentSchema);
-
-module.exports = Comment;
+const User = new mongoose.model("user", userSchema);
+module.exports = User;

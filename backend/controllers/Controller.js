@@ -1,8 +1,7 @@
 const express = require('express');
-const Comment = require('../models/userModel');
+const Comment = require('../models/cmtModel');
+const User = require('../models/userModel')
 const router = express.Router();
-
-
 
 
 // Define routes
@@ -18,6 +17,16 @@ router.get('/comments', async (req, res) => {
 }
 });
 
+router.post('/signup', async (req, res) => {
+  try {
+    const {username, email, password, cPassword}= req.body;
+    await User.create({username, email, password, cPassword});
+    res.status(201).json({ msg: "User Created" });
+  } catch (error) {
+    console.log(error);
+  }
+  
+});
 router.post('/addcomment', async (req, res) => {
   try {
     const {name, topicName, comment}= req.body;
