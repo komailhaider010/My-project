@@ -6,16 +6,7 @@ const router = express.Router();
 
 // Define routes
 
-// Get All Users
-router.get('/comments', async (req, res) => {
-  try {
-    const response = await Comment.find();
-    res.status(200).json(response);
 
-} catch (error) {
-    res.status(500).send(error.message);
-}
-});
 
 router.post('/signup', async (req, res) => {
   try {
@@ -27,12 +18,30 @@ router.post('/signup', async (req, res) => {
   }
   
 });
-router.post('/addcomment', async (req, res) => {
+router.get('/home/:id', async (req, res) => {
+
+  const {id} = req.params;
   try {
-    const {name, topicName, comment}= req.body;
-    // const topicName = req.body;
-    // const comment = req.body;
-    await Comment.create({name, topicName, comment});
+    const getUsrById = await User.findById({_id: id});
+    res.status(200).json(getUsrById);
+
+} catch (error) {
+    console.log(error.message);
+    res.status(500).send();
+}
+});
+
+
+
+
+router.post('/addcomment/:id', async (req, res) => {
+ 
+  const {id}= req.params;
+  console.log(id)
+  try {
+    
+    const {topicName, comment}= req.body;
+    await Comment.create({userId: id, topicName, comment});
     res.status(201).json({ msg: "User Created" });
   } catch (error) {
     console.log(error);
@@ -40,7 +49,19 @@ router.post('/addcomment', async (req, res) => {
   
 });
 
-// get Single User
+
+// Get All Comment
+router.get('/comments', async (req, res) => {
+  try {
+    const response = await Comment.find();
+    res.status(200).json(response);
+
+} catch (error) {
+    res.status(500).send(error.message);
+}
+});
+
+// get Single Comment
 router.get('/comment/:id', async (req, res) => {
 
   const {id} = req.params;
@@ -54,6 +75,8 @@ router.get('/comment/:id', async (req, res) => {
 }
 });
 
+
+
 router.patch('/update/:id', async(req, res) => {
   const {id} = req.params; 
   const updatedata = req.body;
@@ -66,6 +89,8 @@ router.patch('/update/:id', async(req, res) => {
     res.status(500).send({msg:"error"});
 }
 });
+
+
 
 router.delete('/comment/:id', async (req, res) => {
   const {id} = req.params;
