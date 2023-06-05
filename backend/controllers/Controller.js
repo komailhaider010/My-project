@@ -18,6 +18,24 @@ router.post('/signup', async (req, res) => {
   }
   
 });
+router.get('/login', async (req, res) => {
+
+  const {name, email, password} = req.body;
+  
+  try {
+    const getUserByEmail = await User.findOne({email: email});
+    if (getUserByEmail.password===password) {
+      res.status(200).json(getUserByEmail);
+    } else {
+      res.status(400).json({msg: "emial or passowrd not matched"});
+    }
+    
+
+} catch (error) {
+    console.log(error.message);
+    res.status(500).send({msg:"user NOT found"});
+}
+});
 router.get('/home/:id', async (req, res) => {
 
   const {id} = req.params;
@@ -34,7 +52,7 @@ router.get('/home/:id', async (req, res) => {
 
 
 
-router.post('/addcomment/:id', async (req, res) => {
+router.post('/:id/addcomment', async (req, res) => {
  
   const {id}= req.params;
   console.log(id)
