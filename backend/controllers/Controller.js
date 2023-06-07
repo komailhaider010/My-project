@@ -18,9 +18,10 @@ router.post('/signup', async (req, res) => {
   }
   
 });
-router.get('/login', async (req, res) => {
 
-  const {name, email, password} = req.body;
+router.post('/login', async (req, res) => {
+
+  const {email, password} = req.body;
   
   try {
     const getUserByEmail = await User.findOne({email: email});
@@ -36,6 +37,8 @@ router.get('/login', async (req, res) => {
     res.status(500).send({msg:"user NOT found"});
 }
 });
+
+// Get User Dashboard
 router.get('/home/:id', async (req, res) => {
 
   const {id} = req.params;
