@@ -3,16 +3,17 @@ import './pagesStyle.css'
 import { Link} from 'react-router-dom';
 import { ReactDOM } from "react-dom/client";
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const Home = () => {
- 
-
- 
+ const {id} = useParams();
  const [comment, setComment] = useState([]);
  
  useEffect(() => {
    getComment();
  }, []);
+
+ console.log(id);
 // GETTING DATA FROM DATABASE
  const getComment = async () => {
 try {

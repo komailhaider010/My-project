@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-
+    const navigate = useNavigate();
     const [email , setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -11,11 +12,18 @@ const Login = () => {
     const handleLogin = async()=>{
     
         const login = [email, password];
+        console.log(login);
     
          try {
-            const response = await axios.get("http://localhost:8000/login", login);
-            console.log(response);
-            window.alert("Login SUcessfully");
+            const response = await axios.post("http://localhost:8000/login", {email, password}, {
+                headers: {
+                    'content-type': 'application/json'
+                }
+            })
+            window.alert('Login Sucessfully');
+            navigate(`/home/${response.data._id}`)
+            console.log(response.data);
+            
             
          } catch (error) {
             window.alert(error);
