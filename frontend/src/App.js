@@ -5,7 +5,8 @@ import Navbar from "./components/navbar";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import AddComment from "./pages/addcomment";
-import Update from "./pages/update";
+import Update from "./pages/updateComment";
+import UpdateComment from "./pages/updateComment";
 
 function App() {
 
@@ -23,9 +24,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Login/>} />
         <Route path="/signup" element={<Signup/>} />
-        <Route path="/home/:id" element= {<Home/>} />
-        <Route path="/addcomment" element= {<AddComment/>} />
-        <Route path="/updatecomment/:id"element={<Update/>}/>      
+        <Route path="/home/:userid" element= {<Home/>} />
+        <Route path="/:userid/addcomment" element= {<AddComment/>} />
+        <Route path="/updatecomment/:id"element={<UpdateComment/>}/>      
       </Routes>
     </BrowserRouter>
     

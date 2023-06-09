@@ -3,8 +3,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const Update = () => {
-    const navigate = useNavigate();
+const UpdateComment = () => {
+    // const navigate = useNavigate();
     const [name, setName] = useState('');
     const [topicName, setTopicName] = useState('');
     const [comment, setcomment] = useState('');
@@ -37,9 +37,9 @@ const handleUpdate = async()=>{
 
     console.log(updateComment);
     try {
-        const response = await axios.patch(`http://localhost:8000/update/${id}`,{name, topicName, comment,});
+         const response = await axios.patch(`http://localhost:8000/update/${id}`,{name, topicName, comment,});
         window.alert("data Sucessfully Updated");
-        navigate('/home')
+        // navigate('/home')
         
     } catch (error) {
         window.alert(error);
@@ -47,7 +47,8 @@ const handleUpdate = async()=>{
 }
 
 useEffect(() => {
-  getSingleComment();
+  getSingleComment()
+  
 }, []);
 
 
@@ -91,4 +92,4 @@ useEffect(() => {
   )
 }
 
-export default Update
+export default UpdateComment;

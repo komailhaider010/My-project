@@ -6,15 +6,30 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 const Home = () => {
- const {id} = useParams();
+ const {userid} = useParams();
  const [comment, setComment] = useState([]);
+ const [user, setUser] = useState([]);
  
  useEffect(() => {
    getComment();
+   getUser();
  }, []);
 
- console.log(id);
-// GETTING DATA FROM DATABASE
+
+//  GETTING SINGLE USER
+ const getUser = async () => {
+try {
+  const response = await axios.get(`http://localhost:8000/home/${userid}`);
+   setUser(response.data);
+  
+} catch (error) {
+  window.alert(error);
+}  
+ };
+
+
+
+// GETTING ALL COMMENT DATA FROM DATABASE
  const getComment = async () => {
 try {
   const response = await axios.get("http://localhost:8000/comments");
@@ -43,7 +58,7 @@ const handleDelete = async (id)=>{
     
     <div className='homeMainBox' id='mainBoxHome'>
       <div className="addCommentBtnBox">
-        <Link to={'/addComment'} className='Link'>
+        <Link to={`/${userid}/addComment`} className='Link'>
           <button className="addCommentBtn">Add New Comment</button>
         </Link>
       </div>
@@ -57,11 +72,12 @@ const handleDelete = async (id)=>{
           <div key={element._id}className="commentCardBox">
           
           <div className="CommentHeading">
-            <h4 className="userName">{element.name}</h4>
+            <h4 className="userName">{element.userId.username}</h4>
             <h4 className="topicName">{element.topicName}</h4>
           </div>
           <div className="CommentDiscrpitionBox">
             <p className="commentDiscription">{element.comment}</p>
+            <p className="commenttime">{element.Date}</p>
           </div>
           <div className="cardButtonSection">
             <Link to={`/updatecomment/${element._id}`}>

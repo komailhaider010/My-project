@@ -1,12 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 
 
 
 const AddComment = () => {
 
+const {userid} = useParams();
 const [name, setName] = useState('');
 const [topicName, setTopicName] = useState('');
 const [comment, setcomment] = useState('');
@@ -14,10 +16,10 @@ const [error, setError] = useState('');
 
 const handleSubmit = async()=>{
     
-    const addComment = [name, topicName, comment];
+    const addComment = [ topicName, comment];
 
      try {
-        const response = await axios.post("http://localhost:8000/addcomment", addComment ,{
+        const response = await axios.post(`http://localhost:8000/${userid}/addcomment`, {userId: userid, topicName, comment} ,{
         headers: {
             'content-type': 'application/json'
         }

@@ -1,6 +1,7 @@
 import React from 'react'
 import './componentsStyle.css';
 import {Link} from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
 const Navbar = () => {
   return (

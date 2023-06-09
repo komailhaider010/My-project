@@ -10,9 +10,16 @@ const router = express.Router();
 
 router.post('/signup', async (req, res) => {
   try {
+    
     const {username, email, password, cPassword}= req.body;
-    await User.create({username, email, password, cPassword});
-    res.status(201).json({ msg: "User Created" });
+    const check = await User.findOne({email:email})
+    if(check){
+      res.status(402).json({msg: "user Already exist"})
+    }else{
+      await User.create({username, email, password, cPassword});
+      res.status(201).json({ msg: "User Created" });
+    }
+   
   } catch (error) {
     console.log(error);
   }
@@ -39,11 +46,11 @@ router.post('/login', async (req, res) => {
 });
 
 // Get User Dashboard
-router.get('/home/:id', async (req, res) => {
+router.get('/home/:userid', async (req, res) => {
 
-  const {id} = req.params;
+  const {userid} = req.params;
   try {
-    const getUsrById = await User.findById({_id: id});
+    const getUsrById = await User.findById({_id: userid});
     res.status(200).json(getUsrById);
 
 } catch (error) {
@@ -55,14 +62,13 @@ router.get('/home/:id', async (req, res) => {
 
 
 
-router.post('/:id/addcomment', async (req, res) => {
+router.post('/:userid/addcomment', async (req, res) => {
  
-  const {id}= req.params;
-  console.log(id)
+  const {userid}= req.params;
   try {
     
     const {topicName, comment}= req.body;
-    await Comment.create({userId: id, topicName, comment});
+    await Comment.create({userId: userid, topicName, comment});
     res.status(201).json({ msg: "User Created" });
   } catch (error) {
     console.log(error);
@@ -74,7 +80,7 @@ router.post('/:id/addcomment', async (req, res) => {
 // Get All Comment
 router.get('/comments', async (req, res) => {
   try {
-    const response = await Comment.find();
+    const response = await Comment.find().populate('userId');
     res.status(200).json(response);
 
 } catch (error) {
