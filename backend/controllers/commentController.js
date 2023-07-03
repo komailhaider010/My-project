@@ -67,10 +67,22 @@ const deletComment = async (req, res) => {
   }
 };
 
+const getUserComments = async(req, res)=>{
+  const { userid } = req.params;
+
+  try {
+    const userComments = await Comment.find({userId: userid});
+    res.status(200).json(userComments); 
+  } catch (error) {
+    res.status(400).json({msg: "error"});
+  }
+}
+
 module.exports = {
   addComment,
   getAllComments,
   updateComment,
   getSingleComment,
   deletComment,
+  getUserComments,
 };

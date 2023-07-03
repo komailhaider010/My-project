@@ -7,6 +7,7 @@ const {
     updateComment,
     getSingleComment,
     deletComment,
+    getUserComments,
 } = require('../controllers/commentController')
 
 
@@ -15,5 +16,6 @@ router.get('/comment/:id', getSingleComment );
 router.patch('/update/:id', updateComment );
 router.get('/comments', getAllComments);
 router.post('/:userid/addcomment', addComment );
+router.get('/usercomments/:userid', getUserComments );
 
 module.exports = router;
