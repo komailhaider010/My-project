@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import './pagesStyle.css'
 import { Link} from 'react-router-dom';
-import { ReactDOM } from "react-dom/client";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import dateFormat from 'dateformat';
 
 const Home = () => {
  const {userid} = useParams();
@@ -77,7 +77,7 @@ const handleDelete = async (id)=>{
           </div>
           <div className="CommentDiscrpitionBox">
             <p className="commentDiscription">{element.comment}</p>
-            <p className="commenttime">{element.Date}</p>
+            <p className="commenttime">{dateFormat(element.date , "dddd, mmmm dS, yyyy ")}</p>
           </div>
           <div className="cardButtonSection">
             <Link to={`/updatecomment/${element._id}`}>
