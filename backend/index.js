@@ -5,7 +5,8 @@ const db = require('./db/connection');
 const cors = require('cors');
 
  // Replace with the path to your router file
-const Router = require('./controllers/Controller');
+const userRoutes = require('./routes/userRoutes');
+const commentRoutes = require('./routes/commentRoutes');
 
 dotenv.config();
 const app = express();
@@ -14,8 +15,11 @@ const PORT = process.env.PORT;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
+
+
 // Use the router
-app.use(Router);
+app.use(userRoutes);
+app.use(commentRoutes);
 
 app.listen(PORT,()=>{
   console.log(`app is running on ${PORT}`);

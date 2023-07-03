@@ -1,13 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-
-
-
+import { useParams ,useNavigate } from 'react-router-dom';
 
 const AddComment = () => {
 
+const navigate = useNavigate();
 const {userid} = useParams();
 const [name, setName] = useState('');
 const [topicName, setTopicName] = useState('');
@@ -24,13 +22,12 @@ const handleSubmit = async()=>{
             'content-type': 'application/json'
         }
          });
-        console.log(addComment);
         setError('');
         setName('');
         setTopicName('');
         setcomment('');
         window.alert("Comment Sucessfully Added");
-        console.log(addComment);
+        navigate(`/home/${userid}`);
         
      } catch (error) {
         window.alert(error);
