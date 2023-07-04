@@ -71,7 +71,7 @@ const getUserBlogs = async(req, res)=>{
   const { userid } = req.params;
 
   try {
-    const userComments = await Blog.find({userId: userid});
+    const userComments = await Blog.find({userId: userid}).populate("userId");
     res.status(200).json(userComments); 
   } catch (error) {
     res.status(400).json({msg: "error"});

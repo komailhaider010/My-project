@@ -11,7 +11,6 @@ const UpdateComment = () => {
     const [error, setError] = useState('');
     const [userId, setUserId] = useState('');
     const {id} = useParams();
-    console.log(id);
 
     const updateComment = [name, blogTitle, description];
 
@@ -36,8 +35,6 @@ const UpdateComment = () => {
 
 // Handle Update
 const handleUpdate = async()=>{
-
-    console.log(updateComment);
     try {
          const response = await axios.patch(`http://localhost:8000/update/${id}`,{name, blogTitle, description,});
         window.alert("data Sucessfully Updated");

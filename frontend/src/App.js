@@ -6,25 +6,24 @@ import Login from "./pages/login";
 import Signup from "./pages/signup";
 import CreateBlog from "./pages/createBlog";
 import UpdateBlog from "./pages/updateBlog";
+import UserBlogs from "./pages/userBlogs";
+import UserProfile from "./pages/userProfile";
+
+
 
 function App() {
-
-  const currentPath = window.location.pathname;
-
-  const showNavbar = currentPath !== '/';
-  const showNavbar1 = currentPath !== '/signup';
-
 
   return (
     <>
     <BrowserRouter>
-
-      {showNavbar && showNavbar1 && <Navbar/>}
       <Routes>
         
-        <Route path="/home/:userid" element= {<Home/>} />
-        <Route path="/:userid/addcomment" element= {<CreateBlog/>} />
-        <Route path="/updatecomment/:id"element={<UpdateBlog/>}/>
+        <Route path="/home/:userId" element= {<Home/>} />
+        <Route path="/:userId/userprofile" element={<>  <UserProfile/> </>} />
+        <Route path="/:userId/addcomment" element={<>  <CreateBlog/> </>}  />
+        <Route path="/updatecomment/:id" element={<>  <UpdateBlog/> </>} />
+        <Route path= "/:userId/myblogs" element={<> <UserBlogs/> </>}  />
+
         <Route path="/" element={<Login/>} />
         <Route path="/signup" element={<Signup/>} />
               

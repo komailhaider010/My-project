@@ -1,9 +1,11 @@
 import React from 'react'
 import './componentsStyle.css';
-import {Link} from "react-router-dom";
-import { useParams } from 'react-router-dom';
+import {Link , useParams} from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = (props) => {
+
+  const {userId} = props;
+
   return (
     <>
     <div className="navBarMain">
@@ -11,11 +13,11 @@ const Navbar = () => {
         My WebSite
       </div>
       <div className="MenuBar">
-        <Link to={"/home"} className='Link'>
+        <Link to={`/home/${userId}`} className='Link'>
         <div className="menuItems">Home</div>
         </Link>
 
-        <Link to={"/updateuser"} className='Link'>
+        <Link to={`/${userId}/userprofile`} className='Link'>
         <div className="menuItems">Update Data</div>
         </Link>
         <Link to={"/about"} className='Link'>

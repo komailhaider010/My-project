@@ -2,11 +2,12 @@ import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import { useParams ,useNavigate } from 'react-router-dom';
+import Navbar from '../components/navbar';
 
 const AddComment = () => {
 
 const navigate = useNavigate();
-const {userid} = useParams();
+const {userId} = useParams();
 const [name, setName] = useState('');
 const [blogTitle, setBlogTitle] = useState('');
 const [description, setDescription] = useState('');
@@ -16,7 +17,7 @@ const handleSubmit = async()=>{
     
     // const addComment = [ topicName, comment];
      try {
-        await axios.post(`http://localhost:8000/${userid}/addcomment`, {userId: userid, blogTitle, description} ,{
+        await axios.post(`http://localhost:8000/${userId}/addcomment`, {userId: userId, blogTitle, description} ,{
         headers: {
             'content-type': 'application/json'
         }
@@ -26,7 +27,7 @@ const handleSubmit = async()=>{
         setBlogTitle('');
         setDescription('');
         window.alert("Comment Sucessfully Added");
-        navigate(`/home/${userid}`);
+        navigate(`/home/${userId}`);
         
      } catch (error) {
         window.alert(error);
@@ -36,6 +37,7 @@ const handleSubmit = async()=>{
 
   return (
     <>
+    <Navbar userId={userId}/>
     <div className="homeMainBox">
         <h2>Add new Comment</h2>
         {error? `${error}` : "" }

@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './pagesStyle.css'
 import { Link} from 'react-router-dom';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import dateFormat from 'dateformat';
+import Navbar from '../components/navbar';
 
 const Home = () => {
- const {userid} = useParams();
+ const {userId} = useParams();
  const [comment, setComment] = useState([]);
  const [user, setUser] = useState([]);
  
@@ -19,7 +20,7 @@ const Home = () => {
 //  GETTING SINGLE USER
  const getUser = async () => {
 try {
-  const response = await axios.get(`http://localhost:8000/home/${userid}`);
+  const response = await axios.get(`http://localhost:8000/home/${userId}`);
    setUser(response.data);
   
 } catch (error) {
@@ -55,11 +56,15 @@ const handleDelete = async (id)=>{
 
   return (
     <>
+    <Navbar userId={userId}/>
     
     <div className='homeMainBox' id='mainBoxHome'>
       <div className="addCommentBtnBox">
-        <Link to={`/${userid}/addComment`} className='Link'>
+        <Link to={`/${userId}/addComment`} className='Link'>
           <button className="addCommentBtn">Add New Comment</button>
+        </Link>
+        <Link to={`/${userId}/myblogs`} className='Link'>
+          <button className="addCommentBtn">My Blogs</button>
         </Link>
       </div>
 
@@ -79,14 +84,14 @@ const handleDelete = async (id)=>{
             <p className="commentDiscription">{element.description}</p>
             <p className="commenttime">{dateFormat(element.date , "dddd, mmmm dS, yyyy ")}</p>
           </div>
-          <div className="cardButtonSection">
+          {/* <div className="cardButtonSection">
             <Link to={`/updatecomment/${element._id}`}>
             <button className='cardButton' id='editButton'>Edit</button>
             </Link>
             <button className='cardButton' id='deleteButton'
              onClick={()=> handleDelete(element._id)}
             >Delete</button>
-          </div>
+          </div> */}
         </div>
            
           </>

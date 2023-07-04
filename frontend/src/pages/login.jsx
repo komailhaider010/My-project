@@ -12,7 +12,6 @@ const Login = () => {
     const handleLogin = async()=>{
     
         const login = [email, password];
-        console.log(login);
     
          try {
             const response = await axios.post("http://localhost:8000/login", {email, password}, {
@@ -22,7 +21,6 @@ const Login = () => {
             })
             window.alert('Login Sucessfully');
             navigate(`/home/${response.data._id}`)
-            console.log(response.data);
             
             
          } catch (error) {
