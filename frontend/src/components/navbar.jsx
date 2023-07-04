@@ -17,7 +17,7 @@ const Navbar = (props) => {
         <div className="menuItems">Home</div>
         </Link>
 
-        <Link to={`/${userId}/userprofile`} className='Link'>
+        <Link to={`/userprofile/${userId}`} className='Link'>
         <div className="menuItems">Update Data</div>
         </Link>
         <Link to={"/about"} className='Link'>

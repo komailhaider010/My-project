@@ -19,7 +19,7 @@ function App() {
       <Routes>
         
         <Route path="/home/:userId" element= {<Home/>} />
-        <Route path="/:userId/userprofile" element={<>  <UserProfile/> </>} />
+        <Route path="/userprofile/:userId" element={<>  <UserProfile/> </>} />
         <Route path="/:userId/addcomment" element={<>  <CreateBlog/> </>}  />
         <Route path="/updatecomment/:id" element={<>  <UpdateBlog/> </>} />
         <Route path= "/:userId/myblogs" element={<> <UserBlogs/> </>}  />
