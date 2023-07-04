@@ -1,4 +1,4 @@
-const Comment = require('../models/cmtModel');
+const Comment = require('../models/blogModel');
 const User = require('../models/userModel')
 
 // User SignUp

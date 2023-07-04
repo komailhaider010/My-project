@@ -1,12 +1,12 @@
-const Comment = require("../models/cmtModel");
+const Blog = require("../models/blogModel");
 const User = require("../models/userModel");
 
 // ADD COMMENT
-const addComment = async (req, res) => {
+const createBlog = async (req, res) => {
   const { userid } = req.params;
   try {
-    const { topicName, comment } = req.body;
-    await Comment.create({ userId: userid, topicName, comment });
+    const { blogTitle, description } = req.body;
+    await Blog.create({ userId: userid, blogTitle, description });
     res.status(201).json({ msg: "User Created" });
   } catch (error) {
     console.log(error);
@@ -15,9 +15,9 @@ const addComment = async (req, res) => {
 
 // Get All Comment
 
-const getAllComments = async (req, res) => {
+const getAllBlogs = async (req, res) => {
   try {
-    const response = await Comment.find().populate("userId");
+    const response = await Blog.find().populate("userId");
     res.status(200).json(response);
   } catch (error) {
     res.status(500).send(error.message);
@@ -25,11 +25,11 @@ const getAllComments = async (req, res) => {
 };
 
 // UPDATE COMMENT
-const updateComment = async (req, res) => {
+const updateBlog = async (req, res) => {
   const { id } = req.params;
   const updatedata = req.body;
   try {
-    const updateCmt = await Comment.findByIdAndUpdate(id, updatedata, {
+    const updateCmt = await Blog.findByIdAndUpdate(id, updatedata, {
       new: true,
     });
     res.status(200).json(updateCmt);
@@ -41,10 +41,10 @@ const updateComment = async (req, res) => {
 
 // get Single Comment
 
-const getSingleComment = async (req, res) => {
+const getSingleBlog = async (req, res) => {
   const { id } = req.params;
   try {
-    const getUserById = await Comment.findById({ _id: id });
+    const getUserById = await Blog.findById({ _id: id });
     res.status(200).json(getUserById);
   } catch (error) {
     console.log(error.message);
@@ -53,12 +53,12 @@ const getSingleComment = async (req, res) => {
 };
 
 // DELETE COMMNET
-const deletComment = async (req, res) => {
+const deletBlog = async (req, res) => {
   const { id } = req.params;
   try {
-    const getCommentById = await Comment.findByIdAndDelete({ _id: id }).then(
+    const getCommentById = await Blog.findByIdAndDelete({ _id: id }).then(
       () => {
-        res.status(200).json({ msg: "user Deleted" });
+        res.status(200).json({ msg: "Blog Deleted Sucessfully" });
       }
     );
   } catch (error) {
@@ -67,11 +67,11 @@ const deletComment = async (req, res) => {
   }
 };
 
-const getUserComments = async(req, res)=>{
+const getUserBlogs = async(req, res)=>{
   const { userid } = req.params;
 
   try {
-    const userComments = await Comment.find({userId: userid});
+    const userComments = await Blog.find({userId: userid});
     res.status(200).json(userComments); 
   } catch (error) {
     res.status(400).json({msg: "error"});
@@ -79,10 +79,10 @@ const getUserComments = async(req, res)=>{
 }
 
 module.exports = {
-  addComment,
-  getAllComments,
-  updateComment,
-  getSingleComment,
-  deletComment,
-  getUserComments,
+  createBlog,
+  getAllBlogs,
+  updateBlog,
+  getSingleBlog,
+  deletBlog,
+  getUserBlogs,
 };
