@@ -8,23 +8,23 @@ const AddComment = () => {
 const navigate = useNavigate();
 const {userid} = useParams();
 const [name, setName] = useState('');
-const [topicName, setTopicName] = useState('');
-const [comment, setcomment] = useState('');
+const [blogTitle, setBlogTitle] = useState('');
+const [description, setDescription] = useState('');
 const [error, setError] = useState('');
 
 const handleSubmit = async()=>{
     
     // const addComment = [ topicName, comment];
      try {
-        await axios.post(`http://localhost:8000/${userid}/addcomment`, {userId: userid, topicName, comment} ,{
+        await axios.post(`http://localhost:8000/${userid}/addcomment`, {userId: userid, blogTitle, description} ,{
         headers: {
             'content-type': 'application/json'
         }
          });
         setError('');
         setName('');
-        setTopicName('');
-        setcomment('');
+        setBlogTitle('');
+        setDescription('');
         window.alert("Comment Sucessfully Added");
         navigate(`/home/${userid}`);
         
@@ -51,15 +51,15 @@ const handleSubmit = async()=>{
             <div className="commentInputBox">
                 <label>Topic Name:</label>
                 <input type="text" className='newCommentInputs' 
-                value={topicName}
-                onChange={(e)=>setTopicName(e.target.value)}
+                value={blogTitle}
+                onChange={(e)=>setBlogTitle(e.target.value)}
                 />
             </div>
             <div className="commentInputBox">
                 <label>Discription:</label>
                 <textarea className='newCommentInputs'
-                value={comment}
-                onChange={(e)=>setcomment(e.target.value)}
+                value={description}
+                onChange={(e)=>setDescription(e.target.value)}
                 />
             </div>
 

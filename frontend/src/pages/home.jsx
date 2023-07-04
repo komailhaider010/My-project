@@ -73,10 +73,10 @@ const handleDelete = async (id)=>{
           
           <div className="CommentHeading">
             <h4 className="userName">{element.userId.username}</h4>
-            <h4 className="topicName">{element.topicName}</h4>
+            <h4 className="topicName">{element.blogTitle}</h4>
           </div>
           <div className="CommentDiscrpitionBox">
-            <p className="commentDiscription">{element.comment}</p>
+            <p className="commentDiscription">{element.description}</p>
             <p className="commenttime">{dateFormat(element.date , "dddd, mmmm dS, yyyy ")}</p>
           </div>
           <div className="cardButtonSection">
