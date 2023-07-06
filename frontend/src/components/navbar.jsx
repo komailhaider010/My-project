@@ -3,11 +3,9 @@ import './componentsStyle.css';
 import {Link , useParams} from "react-router-dom";
 import DataContext from './dataContext';
 
-const Navbar = (props) => {
+const Navbar = () => {
 
   const [userData, setUserData] = useContext(DataContext)
-
-  const {userId} = props;
 
   return (
     <>

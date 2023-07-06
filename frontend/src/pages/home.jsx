@@ -58,7 +58,7 @@ const handleDelete = async (id)=>{
 
   return (
     <>
-    <Navbar userId={userId}/>
+    <Navbar/>
     
     <div className='homeMainBox' id='mainBoxHome'>
       <div className="addCommentBtnBox">
