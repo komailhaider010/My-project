@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './pagesStyle.css'
 import { Link} from 'react-router-dom';
+import DataContext from '../components/dataContext';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import dateFormat from 'dateformat';
@@ -8,6 +9,7 @@ import Navbar from '../components/navbar';
 
 const Home = () => {
  const {userId} = useParams();
+ const [ userData, setUserData ] = useContext(DataContext);
  const [comment, setComment] = useState([]);
  const [user, setUser] = useState([]);
  
@@ -16,12 +18,12 @@ const Home = () => {
    getUser();
  }, []);
 
-
 //  GETTING SINGLE USER
  const getUser = async () => {
 try {
   const response = await axios.get(`http://localhost:8000/home/${userId}`);
    setUser(response.data);
+   setUserData(userId);
   
 } catch (error) {
   window.alert(error);

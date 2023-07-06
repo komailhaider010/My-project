@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './componentsStyle.css';
 import {Link , useParams} from "react-router-dom";
+import DataContext from './dataContext';
 
 const Navbar = (props) => {
+
+  const [userData, setUserData] = useContext(DataContext)
 
   const {userId} = props;
 
@@ -13,11 +16,11 @@ const Navbar = (props) => {
         My WebSite
       </div>
       <div className="MenuBar">
-        <Link to={`/home/${userId}`} className='Link'>
+        <Link to={`/home/${userData}`} className='Link'>
         <div className="menuItems">Home</div>
         </Link>
 
-        <Link to={`/userprofile/${userId}`} className='Link'>
+        <Link to={`/userprofile/${userData} `} className='Link'>
         <div className="menuItems">Update Data</div>
         </Link>
         <Link to={"/about"} className='Link'>
