@@ -9,15 +9,24 @@ const AddComment = () => {
 const navigate = useNavigate();
 const {userId} = useParams();
 const [name, setName] = useState('');
+const [blogImage, setBlogImage] = useState('');
 const [blogTitle, setBlogTitle] = useState('');
 const [description, setDescription] = useState('');
 const [error, setError] = useState('');
+
+const handleBlogImageUpload = (e)=>{
+        setBlogImage(URL.createObjectURL(e.target.files[0]));
+}
 
 const handleSubmit = async()=>{
     
     // const addComment = [ topicName, comment];
      try {
-        await axios.post(`http://localhost:8000/${userId}/addcomment`, {userId: userId, blogTitle, description} ,{
+        await axios.post(`http://localhost:8000/${userId}/addcomment`,
+         {  userId: userId,
+            blogTitle,
+            description
+        } ,{
         headers: {
             'content-type': 'application/json'
         }
@@ -44,10 +53,10 @@ const handleSubmit = async()=>{
         <div className="newcommentInputBox">
             <div className="commentInputBox">
                 <label> Your Name:</label>
-                <input type="text" className='newCommentInputs'
-                value={name}
-                onChange={(e)=>setName(e.target.value)}
+                <input type="file" className='newCommentInputs'
+                onChange={(e)=>setBlogImage(URL.createObjectURL(e.target.files[0]) || null )}
                 />
+                <img src={blogImage} className='newCommentBlogImage' />
             </div>
 
             <div className="commentInputBox">

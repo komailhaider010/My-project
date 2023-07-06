@@ -136,6 +136,10 @@ margin: 10px;
     display: block;
     margin: auto;
 }
+.newCommentBlogImage{
+    max-width: 70px;
+    width: 70px;
+}
 .addCommentSubmittBtn{
     width: 30%;
     height: 30px;
