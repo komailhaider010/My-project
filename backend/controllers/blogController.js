@@ -4,14 +4,7 @@ const User = require("../models/userModel");
 // ADD COMMENT
 const createBlog = async (req, res) => {
   const { userid } = req.params;
-
-  console.log(req.file);
-
   try {
-    const blogImg = req.file;
-
-    console.log(blogImg);
-    
     const { blogTitle, description } = req.body;
     await Blog.create({ userId: userid, blogTitle, description });
     res.status(201).json({ msg: "User Created" });
