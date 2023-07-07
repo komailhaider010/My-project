@@ -8,34 +8,36 @@ const AddComment = () => {
 
 const navigate = useNavigate();
 const {userId} = useParams();
-const [name, setName] = useState('');
-const [blogImage, setBlogImage] = useState('');
+// const [name, setName] = useState('');
+const [blogImg, setBlogImg] = useState('');
 const [blogTitle, setBlogTitle] = useState('');
 const [description, setDescription] = useState('');
 const [error, setError] = useState('');
 
-const handleBlogImageUpload = (e)=>{
-        setBlogImage(URL.createObjectURL(e.target.files[0]));
-}
-
 const handleSubmit = async()=>{
+
+    const formData = new FormData();
+
+    formData.append('userId', userId)
+    formData.append('blogTitle', blogTitle)
+    formData.append('description', description)
+    formData.append('blogImg', blogImg)
+
+
+    console.log(formData);
     
-    // const addComment = [ topicName, comment];
      try {
         await axios.post(`http://localhost:8000/${userId}/addcomment`,
-         {  userId: userId,
-            blogTitle,
-            description
-        } ,{
+        formData
+        ,{
         headers: {
             'content-type': 'application/json'
         }
          });
         setError('');
-        setName('');
         setBlogTitle('');
         setDescription('');
-        window.alert("Comment Sucessfully Added");
+        window.alert("Blog Sucessfully Added");
         navigate(`/home/${userId}`);
         
      } catch (error) {
@@ -52,11 +54,11 @@ const handleSubmit = async()=>{
         {error? `${error}` : "" }
         <div className="newcommentInputBox">
             <div className="commentInputBox">
-                <label> Your Name:</label>
+                <label> Upload Image:</label>
                 <input type="file" className='newCommentInputs'
-                onChange={(e)=>setBlogImage(URL.createObjectURL(e.target.files[0]) || null )}
+                onChange={(e)=>setBlogImg(e.target.files[0])}
                 />
-                <img src={blogImage} className='newCommentBlogImage' />
+                <img src={blogImg} className='newCommentBlogImage' />
             </div>
 
             <div className="commentInputBox">
