@@ -8,6 +8,9 @@ const blogSchema = new mongoose.Schema({
     blogTitle: {
         type: String
     },
+    blogImg:{
+        type: String
+    },
     description: {
         type: String    
     },
