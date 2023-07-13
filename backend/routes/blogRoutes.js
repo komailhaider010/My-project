@@ -1,7 +1,30 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const upload = multer({ dest: '../uploads/blogImages/' })
+
+// const storage = multer.diskStorage({
+//     destination: './public/blogImages',
+//     filename: (req, file, cb)=>{
+//         cb(null, file.filename+Date.now())
+//     }
+// })
+
+// const upload = multer({
+//     storage: storage
+// })
+
+
+
+const upload = multer({
+    storage: multer.diskStorage({
+        destination:function(req, file, cb){
+            cb(null, './public/blogImages')
+        },
+        filename:function(req, file, cb){
+            cb(null, file.filename+'-'+Date.now()+".jpg")
+        }
+    })
+});
 
 const {
     deletBlog,

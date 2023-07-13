@@ -56,7 +56,7 @@ const handleSubmit = async()=>{
             <div className="commentInputBox">
                 <label> Upload Image:</label>
                 <input type="file" className='newCommentInputs'
-                onChange={(e)=>setBlogImg(e.target.files[0])}
+                onChange={(e)=>setBlogImg(URL.createObjectURL(e.target.files[0]))}
                 />
                 <img src={blogImg} className='newCommentBlogImage' />
             </div>
