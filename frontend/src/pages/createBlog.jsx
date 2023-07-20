@@ -9,31 +9,44 @@ const AddComment = () => {
 const navigate = useNavigate();
 const {userId} = useParams();
 // const [name, setName] = useState('');
-const [blogImg, setBlogImg] = useState('');
+const [blogImg, setBlogImg] = useState();
 const [blogTitle, setBlogTitle] = useState('');
 const [description, setDescription] = useState('');
 const [error, setError] = useState('');
 
-const handleSubmit = async()=>{
+// const uploadBlogImg = (event)=>{
+//  const file = event.target.files[0];
+//  setBlogImg(URL.createObjectURL(file));
+//  console.log(blogImg);
+// }
 
-    const formData = new FormData();
+const handleSubmit = async(e)=>{
+    
+    const blog = new FormData();
+    console.log(blogImg);
+    
+    blog.set('blogImg', blogImg);
+    blog.append('userId', userId);
+    blog.append('blogTitle', blogTitle);
+    blog.append('description', description);
 
-    formData.append('userId', userId)
-    formData.append('blogTitle', blogTitle)
-    formData.append('description', description)
-    formData.append('blogImg', blogImg)
+    console.log(blog);
 
-
-    console.log(formData);
+    // const blog = {
+    //     userId: userId,
+    //     blogTitle: blogTitle,
+    //     description: description,
+    //     blogImg: blogImg
+    // }
     
      try {
         await axios.post(`http://localhost:8000/${userId}/addcomment`,
-        formData
-        ,{
-        headers: {
-            'content-type': 'application/json'
-        }
-         });
+        blog
+        // ,{
+        // headers: {
+        //     'content-type': 'application/json'
+        // }}
+        );
         setError('');
         setBlogTitle('');
         setDescription('');
@@ -51,14 +64,15 @@ const handleSubmit = async()=>{
     <Navbar userId={userId}/>
     <div className="homeMainBox">
         <h2>Add new Comment</h2>
-        {error? `${error}` : "" }
         <div className="newcommentInputBox">
             <div className="commentInputBox">
                 <label> Upload Image:</label>
                 <input type="file" className='newCommentInputs'
-                onChange={(e)=>setBlogImg(URL.createObjectURL(e.target.files[0]))}
+                name='blogImg' id='blogImg'
+                onChange={(e)=>setBlogImg(e.target.files[0])}
                 />
-                <img src={blogImg} className='newCommentBlogImage' />
+                {/* Display the image if blogImg is set */}
+            {/* {blogImg && <img src={URL.createObjectURL(blogImg)} className="newCommentBlogImage" />} */}
             </div>
 
             <div className="commentInputBox">
