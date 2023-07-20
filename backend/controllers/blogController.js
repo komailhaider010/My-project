@@ -1,5 +1,6 @@
 const Blog = require("../models/blogModel");
 const User = require("../models/userModel");
+const fs = require('fs');
 
 // ADD COMMENT
 const createBlog = async (req, res) => {
@@ -8,15 +9,22 @@ const createBlog = async (req, res) => {
   // console.log(req.file);
 
   try {
-    const blogImg = req.file.filename;
+    // Assuming you have set up the multer middleware correctly
+    if (!req.file) {
+      return res.status(400).json({ msg: 'No file uploaded' });
+    }
+
+    const blogImg = req.file.path;
 
     console.log(blogImg);
-    
+      
+
     const { blogTitle, description } = req.body;
-    await Blog.create({ userId: userid, blogImg , blogTitle, description });
-    res.status(201).json({ msg: "User Created" });
+    await Blog.create({ userId: userid, blogImg: blogImg , blogTitle, description });
+    res.status(201).json({ msg: 'Blog Created' });
   } catch (error) {
     console.log(error);
+    res.status(500).json({ msg: 'Internal Server Error' });
   }
 };
 
