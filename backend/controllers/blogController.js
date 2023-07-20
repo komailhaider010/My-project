@@ -1,26 +1,27 @@
 const Blog = require("../models/blogModel");
 const User = require("../models/userModel");
 const fs = require('fs');
+const path = require('path')
 
 // ADD COMMENT
 const createBlog = async (req, res) => {
   const { userid } = req.params;
-
-  // console.log(req.file);
-
   try {
     // Assuming you have set up the multer middleware correctly
     if (!req.file) {
       return res.status(400).json({ msg: 'No file uploaded' });
     }
 
-    const blogImg = req.file.path;
+    const blogImg = `/blogImages/${req.file.filename}`;
 
     console.log(blogImg);
-      
+    // const blogImg = {
+    //   data: fs.readFileSync(req.file.path),
+    //   contentType: req.file.mimetype,
+    // };
 
     const { blogTitle, description } = req.body;
-    await Blog.create({ userId: userid, blogImg: blogImg , blogTitle, description });
+    await Blog.create({ userId: userid, blogImg,  blogTitle, description });
     res.status(201).json({ msg: 'Blog Created' });
   } catch (error) {
     console.log(error);
@@ -33,6 +34,12 @@ const createBlog = async (req, res) => {
 const getAllBlogs = async (req, res) => {
   try {
     const response = await Blog.find().populate("userId");
+    // response.forEach(blog => {
+    //    // Assuming blogImg contains only the filename (e.g., "image.jpg")
+    //    blog.blogImg = `/blogImages/${blog.blogImg}`
+    // });
+
+    console.log(response);
     res.status(200).json(response);
   } catch (error) {
     res.status(500).send(error.message);

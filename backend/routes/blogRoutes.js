@@ -21,7 +21,8 @@ const upload = multer({
             cb(null, './public/blogImages')
         },
         filename:function(req, file, cb){
-            cb(null, file.filename +'-'+ Date.now()+ '.jpg')
+            console.log(file);
+            cb(null, file.fieldname + "-"+ Date.now()+".jpg")
         }
     })
 });
