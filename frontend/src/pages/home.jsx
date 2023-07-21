@@ -79,7 +79,9 @@ const handleDelete = async (id)=>{
           <div key={element._id}className="commentCardBox">
           
           <div className="CommentHeading">
-            <h4 className="userName">{element.userId.username}</h4>
+          <img src={`http://localhost:8000/${element.userId.profileImg}`} alt="ProfileIMG" className='userProfileImg'/>
+            <span className="userName">{element.userId.username}</span>
+            
             <h4 className="topicName">{element.blogTitle}</h4>
             <img src={`http://localhost:8000/${element.blogImg}`} alt="Blog Image" className='blogImag' />
           </div>

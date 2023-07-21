@@ -168,3 +168,12 @@ margin: 10px;
    flex-wrap: wrap;
     
 }
+
+/* USER PROFILE PAGE */
+.userProfileImg{
+    border: 1px solid grey;
+    width: 4rem;
+    height: 4rem;
+    max-width: 4rem;
+    border-radius: 2rem;
+}
