@@ -4,6 +4,8 @@ import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import dateFormat from 'dateformat';
 import Navbar from '../components/navbar';
+import {FiEdit} from 'react-icons/fi';
+import {MdOutlineAutoDelete} from 'react-icons/md';
 
 const UserBlogs = () => {
 
@@ -44,7 +46,32 @@ const UserBlogs = () => {
     <div className='userBlogsMainBox'>
     {blogs.map((element)=>(
           <>
-          <div key={element._id}className="commentCardBox">
+
+
+<div className="blogCard">
+        <div className="blogImageBox" key={element._id}>
+          <img src={`http://localhost:8000/${element.blogImg}`} alt=""  className='blogImage'/>
+        </div>
+        <div className="blogDescriptionBox">
+          <h4 className="blogTitle">{element.blogTitle}</h4>
+          <p className='blogDescription'>{element.description}</p>
+          <div className="dateBox">
+          <span className="blogDate">{dateFormat(element.date , "dddd, mmmm dS, yyyy ")}</span>
+        </div>
+        </div>
+        <div className="blogUserDataBox">
+          <img src={`http://localhost:8000/${element.userId.profileImg}`} alt="ProfileImage" className='userProfileImage'/>
+          <span className="blogUserName">{element.userId.username}</span>
+          <div className="cardButtonsBox">
+          <Link to={`/updatecomment/${element._id}`}>
+            <span className='cardButton editButton'><FiEdit/></span>
+          </Link>
+            <span className='cardButton deleteButton'onClick={()=> handleDelete(element._id)}><MdOutlineAutoDelete/></span>
+
+          </div>
+        </div>
+      </div> 
+          {/* <div key={element._id}className="commentCardBox">
           
           <div className="CommentHeading">
             <h4 className="userName">{element.userId.username}</h4>
@@ -63,7 +90,7 @@ const UserBlogs = () => {
             >Delete</button>
           </div>
         </div>
-           
+            */}
           </>
 
          ))}

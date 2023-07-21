@@ -79,13 +79,66 @@ margin: 10px;
 .addCommentBtn:hover{
     background-color: aquamarine;
 }
-/* CARD SECTION */
+/* NEW CARD SECTION */
 .commentSectionMainBox{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
-.commentCardBox{
+.blogCard{
+    margin: 1rem;
+    border: 2px solid grey;
+    width: 22rem;
+}
+.blogImageBox{
+    overflow: hidden;  
+}
+.blogImage{
+    width: 100%;
+    height: 12rem;
+}
+.blogDescriptionBox{
+    padding: 1rem;
+}
+.blogUserDataBox{
+    display: flex;
+    align-items: center;
+}
+.userProfileImage{
+    margin: 0.4rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
+.dateBox{
+    width: 10rem;
+    margin-left: auto;
+}
+.blogDate{
+    font-size: 0.8rem;
+    margin-left: auto;
+}
+.cardButtonsBox{
+    margin-left: 3rem;
+}
+.cardButton{
+    font-size: 1.8rem;
+    margin: 1rem;
+    color: black ;
+}
+.editButton:hover{
+    color: green;
+}
+.deleteButton:hover{
+    color: red;
+}
+
+
+
+
+/* CARD SECTION */
+
+/* .commentCardBox{
     text-align: center;
     width: 350px;
     border: 2px solid black;
@@ -119,7 +172,7 @@ margin: 10px;
 #deleteButton:hover{
     background-color: rgb(246, 91, 91);
 }
-
+ */
 
 
 /* ADD NEW COMMENT SECTION */

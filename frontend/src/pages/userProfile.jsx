@@ -13,7 +13,7 @@ const updateUserProfile = async ()=>{
   try {
     const formData = new FormData();
     formData.append('profileImg', profileImg);
-    
+
     const response = await axios.patch(`http://localhost:8000/updateuser/${userId}`, formData);
     window.alert("Profile Data Updated Sucessfully");
     setProfileImg();
@@ -51,7 +51,7 @@ const updateUserProfile = async ()=>{
             onChange={(e)=>setProfileImg(e.target.files[0])}
                 />
 
-            <button onClick={updateUserProfile}>Update</button>
+            <button onClick={updateUserProfile}>Update profile Pic</button>
     </div>
     
     </>

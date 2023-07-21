@@ -6,6 +6,9 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import dateFormat from 'dateformat';
 import Navbar from '../components/navbar';
+import image from '../assets/blogImg.jpg';
+import {FiEdit} from 'react-icons/fi';
+import {MdOutlineAutoDelete} from 'react-icons/md';
 
 const Home = () => {
  const {userId} = useParams();
@@ -76,7 +79,37 @@ const handleDelete = async (id)=>{
 
          {comment.map((element)=>(
           <>
-          <div key={element._id}className="commentCardBox">
+          <div className="blogCard" key={element._id}>
+        <div className="blogImageBox">
+          <img src={`http://localhost:8000/${element.blogImg}`} alt=""  className='blogImage'/>
+        </div>
+        <div className="blogDescriptionBox">
+          <h4 className="blogTitle">{element.blogTitle}</h4>
+          <p className='blogDescription'>{element.description}</p>
+          <div className="dateBox">
+          <span className="blogDate">{dateFormat(element.date , "dddd, mmmm dS, yyyy ")}</span>
+        </div>
+        </div>
+        <div className="blogUserDataBox">
+          <img src={`http://localhost:8000/${element.userId.profileImg}`} alt="ProfileImage" className='userProfileImage'/>
+          <span className="blogUserName">{element.userId.username}</span>
+          <div className="cardButtonsBox">
+            {/* <span className='cardButton editButton'><FiEdit/></span>
+            <span className='cardButton deleteButton'><MdOutlineAutoDelete/></span> */}
+
+          </div>
+        </div>
+      </div> 
+
+
+
+
+
+
+
+
+
+          {/* <div key={element._id}className="commentCardBox">
           
           <div className="CommentHeading">
           <img src={`http://localhost:8000/${element.userId.profileImg}`} alt="ProfileIMG" className='userProfileImg'/>
@@ -88,7 +121,7 @@ const handleDelete = async (id)=>{
           <div className="CommentDiscrpitionBox">
             <p className="commentDiscription">{element.description}</p>
             <p className="commenttime">{dateFormat(element.date , "dddd, mmmm dS, yyyy ")}</p>
-          </div>
+          </div> */}
           {/* <div className="cardButtonSection">
             <Link to={`/updatecomment/${element._id}`}>
             <button className='cardButton' id='editButton'>Edit</button>
@@ -97,13 +130,13 @@ const handleDelete = async (id)=>{
              onClick={()=> handleDelete(element._id)}
             >Delete</button>
           </div> */}
-        </div>
+        {/* </div> */}
            
           </>
 
          ))}
       </div>
-       
+
       
     </div>
 
