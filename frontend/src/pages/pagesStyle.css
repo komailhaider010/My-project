@@ -101,9 +101,14 @@ margin: 10px;
     padding: 1rem;
     padding-bottom: 0px;
 }
-.blogTitle,
+.blogTitle{
+    margin: 0.5rem;
+}
 .blogDescription{
     margin: 0.5rem;
+    height: 4rem;
+    overflow-y: scroll;
+    
 }
 .blogUserDataBox{
     display: flex;
