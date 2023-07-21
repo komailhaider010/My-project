@@ -14,7 +14,6 @@ const createBlog =  async (req , res) => {
   console.log(req.file);
   try {
 
-
     // Assuming you have set up the multer middleware correctly
     if (!req.file) {
       return res.status(400).json({ msg: 'No file uploaded' });
@@ -79,11 +78,13 @@ const getSingleBlog = async (req, res) => {
 const deletBlog = async (req, res) => {
   const { id } = req.params;
   try {
-    const getCommentById = await Blog.findByIdAndDelete({ _id: id }).then(
-      () => {
-        res.status(200).json({ msg: "Blog Deleted Sucessfully" });
-      }
-    );
+    const getBlogById = await Blog.findByIdAndDelete({ _id: id });
+     // Delete the previous file if a new one is uploaded
+     const oldBlogImage = path.join(__dirname, '..','public', getBlogById.blogImg);
+     if (fs.existsSync(oldBlogImage)) {
+         fs.unlinkSync(oldBlogImage);
+     }
+     res.status(200).json({ msg: "Blog Deleted Sucessfully" });
   } catch (error) {
     console.log(error.message);
     res.status(500).send();
