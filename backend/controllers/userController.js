@@ -67,11 +67,13 @@ const updateUserProfile = async (req, res) => {
     const user = await User.findById({ _id: userid });
 
     // IF FILE PROFILE IMAGE EXIST 
-    const oldProfileImage = path.join(__dirname, '..','public', user.profileImg);
+    if(user.profileImg){
+      const oldProfileImage = path.join(__dirname, '..','public', user.profileImg);
      if (fs.existsSync(oldProfileImage)) {
          fs.unlinkSync(oldProfileImage);
      }
 
+    }
 
     // ONLY UPDATE DATA WHICH DEFINE
     if (email) user.email = email;
